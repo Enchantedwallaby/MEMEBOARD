@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "16189158370",
+    "project_id": "memeboard-a53d6",
+    "storage_bucket": "memeboard-a53d6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16189158370:android:076877b7eb30e439137fbb",
+        "android_client_info": {
+          "package_name": "com.example.memeboard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvKuijArGKEnOr1AJv6myRd4cAVW_cvqE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
