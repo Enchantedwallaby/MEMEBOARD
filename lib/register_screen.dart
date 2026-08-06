@@ -33,6 +33,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         password: password,
       );
 
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const MainScreen()),
@@ -53,9 +54,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
           message = e.message ?? 'An unknown error occurred.';
       }
 
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
     } finally {
-      setState(() => isLoading = false);
+      if (mounted) {
+        setState(() => isLoading = false);
+      }
     }
   }
 
