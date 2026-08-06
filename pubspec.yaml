@@ -17,6 +17,9 @@ dependencies:
   cloud_firestore: ^4.17.0
   image_picker: ^1.1.1
   firebase_storage: ^11.7.2
+  cached_network_image: ^3.3.1
+  image: ^4.1.7
+  mime: ^1.0.5
   
 
 dev_dependencies:
@@ -30,7 +33,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/logo.png
+    - assets/
 
 flutter_icons:
   android: true

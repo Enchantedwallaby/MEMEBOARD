@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'login_screen.dart';
+import 'welcome_screen.dart';
 import 'main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,6 +14,7 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _ctrl;
   late final Animation<Offset> _slide;
+  Timer? _timer;
 
   @override
   void initState() {
@@ -27,12 +28,13 @@ class _SplashScreenState extends State<SplashScreen>
       end: const Offset(0, -1),
     ).animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
 
-    Timer(const Duration(seconds: 3), () async {
+    _timer = Timer(const Duration(seconds: 3), () async {
       await _ctrl.forward();
       final user = FirebaseAuth.instance.currentUser;
+      if (!mounted) return;
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (_) => user == null ? const LoginScreen() : const MainScreen(),
+          builder: (_) => user == null ? const WelcomeScreen() : const MainScreen(),
         ),
       );
     });
@@ -40,6 +42,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void dispose() {
+    _timer?.cancel();
     _ctrl.dispose();
     super.dispose();
   }

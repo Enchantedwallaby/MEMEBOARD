@@ -1,6 +1,5 @@
 // post_screen.dart
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -32,6 +31,7 @@ class _PostScreenState extends State<PostScreen> {
     final picked = await _picker.pickImage(source: ImageSource.gallery);
     if (picked == null) return;
 
+    if (!mounted) return;
     setState(() {
       _pickedFile = picked;
       _compressedBytes = null;
@@ -41,6 +41,7 @@ class _PostScreenState extends State<PostScreen> {
 
     // Compress/rescale (adjust maxWidth / quality as needed)
     final bytes = await compute(_compressImageBytes, CompressorParams(rawBytes, 1024, 80));
+    if (!mounted) return;
     setState(() {
       _compressedBytes = bytes;
     });
@@ -72,6 +73,7 @@ class _PostScreenState extends State<PostScreen> {
         final transferred = snapshot.bytesTransferred;
         final total = snapshot.totalBytes;
         if (total > 0) {
+          if (!mounted) return;
           setState(() => uploadProgress = transferred / total);
         }
       }, onError: (e) {
@@ -88,6 +90,7 @@ class _PostScreenState extends State<PostScreen> {
         'timestamp': FieldValue.serverTimestamp(),
       });
 
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Uploaded successfully')));
       setState(() {
         _pickedFile = null;
@@ -97,8 +100,10 @@ class _PostScreenState extends State<PostScreen> {
         uploadProgress = 0.0;
       });
     } catch (e) {
-      setState(() => isUploading = false);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Upload error: $e')));
+      if (mounted) {
+        setState(() => isUploading = false);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Upload error: $e')));
+      }
     } finally {
       _uploadTask = null;
     }
@@ -107,11 +112,13 @@ class _PostScreenState extends State<PostScreen> {
   // Allow canceling
   void cancelUpload() {
     _uploadTask?.cancel();
-    setState(() {
-      isUploading = false;
-      uploadProgress = 0.0;
-      _uploadTask = null;
-    });
+    if (mounted) {
+      setState(() {
+        isUploading = false;
+        uploadProgress = 0.0;
+        _uploadTask = null;
+      });
+    }
   }
 
   Widget buildImagePreview() {
