@@ -1164,60 +1164,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 40),
-
-          // Download buttons
-          Wrap(
-            spacing: 16,
-            runSpacing: 16,
-            alignment: WrapAlignment.center,
-            children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 28,
-                    vertical: 18,
-                  ),
-                  backgroundColor: const Color(0xFFC084FC), // Light purple
-                  foregroundColor: const Color(0xFF581C87),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                onPressed: () {},
-                child: const Text(
-                  'Download for iOS',
-                  style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w900,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 28,
-                    vertical: 18,
-                  ),
-                  backgroundColor: const Color(0xFF22D3EE), // Cyan
-                  foregroundColor: const Color(0xFF083344),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                onPressed: () {},
-                child: const Text(
-                  'Download for Android',
-                  style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w900,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 24),
           const Text(
             'Also on web. Free forever. No credit card. No BS.',
             style: TextStyle(
