@@ -7,6 +7,8 @@ FLUTTER_ROOT="${FLUTTER_CACHE_DIR}/flutter"
 FLUTTER_ARCHIVE="${FLUTTER_CACHE_DIR}/flutter_linux_${FLUTTER_VERSION}-stable.tar.xz"
 FLUTTER_URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}-stable.tar.xz"
 
+git config --global --add safe.directory "$PWD"
+
 if [[ ! -x "${FLUTTER_ROOT}/bin/flutter" ]]; then
   mkdir -p "${FLUTTER_CACHE_DIR}"
   if [[ ! -f "${FLUTTER_ARCHIVE}" ]]; then
